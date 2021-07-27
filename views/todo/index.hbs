@@ -1,0 +1,21 @@
+<h2>Task List:</h2>
+<a class="btn btn-dark mb-2" href="/todo/add">Add Task</a>
+
+{{#if todos.length}}
+    <ul>
+    {{#each todos}}
+        <div class="card card-body mb-2">
+            <h4>{{title}}</h4>
+            <p>Due date/Deadlines: {{dueDate}}</p>
+            <p>Creation date: {{time}} (Jakarta, GMT +07.00)</p>
+            <form action="/todo/delete" method="POST">
+                <a class="btn btn-dark mb-2" href="/todo/edit/{{_id}}">Edit Task</a>
+                <input type="hidden" value="{{_id}}" name="id">
+                <button class="btn btn-danger mb-2" type="submit">Delete Task</button>
+            </form>
+        </div>
+    {{/each}}
+    </ul>
+{{else}}
+    <p>No task!</p>
+{{/if}}
