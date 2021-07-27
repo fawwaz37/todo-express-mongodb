@@ -3,5 +3,5 @@ module.exports = {
     // Connect to MonggoDb, 
     // example atlas : mongodb+srv://zekaistodo:password@clusters.rqvdo.mongodb.net/Database?retryWrites=true&w=majority
     // example local : mongodb://127.0.0.1:27017
-    dbURI: '' 
+    dbURI: 'mongodb+srv://xxx' 
   }

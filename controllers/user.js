@@ -1,4 +1,3 @@
-const { db } = require('../mongodb');
 let { checkEmail, createUser, editTodo, createTodo, deleteTodo } = require('../mongodb/db')
 let { getHashedPassword } = require('./function')
 

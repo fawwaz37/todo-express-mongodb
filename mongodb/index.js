@@ -14,4 +14,3 @@ function connectMongoDb() {
 }
 
 module.exports.connectMongoDb = connectMongoDb
-exports.db = require('./db')
