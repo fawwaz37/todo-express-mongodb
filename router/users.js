@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 const passport = require('passport');
 
-const { registerUser } = require('../controllers/user')
+const { registerUser, deleteUserAccount } = require('../controllers/user')
 const { notAuthenticated } = require('../controllers/auth')
 
 router.get('/register', notAuthenticated, (req, res) => {
@@ -15,9 +15,9 @@ router.get('/login', notAuthenticated, (req, res) => {
 })
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-      successRedirect: '/todo',
-      failureRedirect: '/users/login',
-      passReqToCallback: true // failureFlash: true
+        successRedirect: '/todo',
+        failureRedirect: '/users/login',
+        passReqToCallback: true // failureFlash: true
     })(req, res, next);
 });
 
@@ -25,5 +25,10 @@ router.get('/logout', (req,res) => {
     req.logout();
     res.redirect('/users/login');
 });
+
+router.get('/delete', (req, res) => {
+    res.render('delete')
+})
+router.post('/delete', deleteUserAccount)
 
 module.exports = router

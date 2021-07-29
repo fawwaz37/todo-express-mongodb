@@ -1,4 +1,4 @@
-let { checkEmail, createUser, editTodo, createTodo, deleteTodo } = require('../mongodb/db')
+let { checkEmail, createUser, editTodo, createTodo, deleteTodo, deleteUser } = require('../mongodb/db')
 let { getHashedPassword } = require('./function')
 
 async function registerUser(req, res) {
@@ -79,4 +79,22 @@ async function editTodoUser(req, res) {
     }
 }
 
-module.exports = { registerUser, addTodoUser, deleteTodoUser, editTodoUser }
+async function deleteUserAccount(req, res) {
+    try {
+        let id = req.user.id
+        let { resp } = req.body
+        if (resp == 'yes') {
+            deleteUser(id)
+            res.render('login', {
+                message: 'Succes Deleted Account, Please Register',
+                messageClass: 'alert-success'
+            });
+        } else {
+            res.redirect('/todo')
+        }
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+module.exports = { registerUser, addTodoUser, deleteTodoUser, editTodoUser, deleteUserAccount }

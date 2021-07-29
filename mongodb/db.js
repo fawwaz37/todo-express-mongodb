@@ -30,6 +30,13 @@ moment.tz.setDefault('Asia/Jakarta').locale('id')
     }
     module.exports.checkAuth = checkAuth
 
+    async function deleteUser(id) {
+        User.deleteOne({_id: id}, function(err, obj) {
+            if (err) throw err;
+        })
+    }
+    module.exports.deleteUser = deleteUser
+
     async function getTodoAll(id) {
         let users = await User.findOne({_id: id}).lean()
         let db = users.todo
