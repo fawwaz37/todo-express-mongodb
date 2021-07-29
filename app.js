@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
+const flash = require('connect-flash');
 const { connectMongoDb } = require('./mongodb')
 const settings = require('./controllers/settings')
 
@@ -27,6 +28,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./controllers/config')(passport);
 
+app.use(flash());
+
 app.engine('hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', 'hbs');
 
@@ -41,6 +44,7 @@ app.get('/about', (req, res) => {
 })
 
 app.use(function(req, res, next) {
+  res.locals.error = req.flash('error');
   res.locals.user = req.user || null;
   next();
 })

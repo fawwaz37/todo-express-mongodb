@@ -8,15 +8,13 @@ module.exports = function(passport) {
             let hashed = getHashedPassword(password)
             User.findOne({email: email}).then(users => {
                 if (!users) return done(null, false, {
-                    message: 'That email is not registered',
-                    messageClass: 'alert-danger'
-                })
+                        message: 'That email is not registered',
+                    })
                 if (email === users.email && hashed === users.password) {
                     return done(null, users);
                 } else {
                     return done(null, false, {
                         message: 'Invalid username or password',
-                        messageClass: 'alert-danger'
                     })
                 }
             })
