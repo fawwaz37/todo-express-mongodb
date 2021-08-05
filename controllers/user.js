@@ -25,6 +25,7 @@ async function registerUser(req, res) {
                     message: 'User already registered.',
                     messageClass: 'alert-danger'
                 })
+                return
             }
             let hashedPassword = getHashedPassword(password)
             createUser(name, email, hashedPassword)
@@ -32,11 +33,13 @@ async function registerUser(req, res) {
                 message: 'Registration Complete. Please login to continue.',
                 messageClass: 'alert-success'
             });
+            return
         } else {
             res.render('register', {
                 message: 'Password does not match.',
                 messageClass: 'alert-danger'
             });
+            return
         }
     } catch(err) {
         console.log(err)
